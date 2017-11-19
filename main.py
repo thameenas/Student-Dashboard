@@ -5,6 +5,11 @@ import models as dbHandler
 
 app = Flask(__name__)
 
+def redirect_url(default='index'):
+    return request.args.get('next') or \
+           request.referrer or \
+           url_for(default)
+
 @app.route('/', methods=['POST', 'GET'])
 def home():
 	if request.method=='POST':
@@ -63,7 +68,13 @@ def topic(subid):
 
 @app.route('/topic/<subid>/new',methods=['GET','POST'])
 def newmessage(subid):
-	return subid
+	if request.method=='POST':
+		message=request.form['message']
+		userId=dbHandler.findUserId(session['username'])
+		print userId
+		dbHandler.addmsg(subid,userId[0],message)
+		return redirect(url_for('.topic',subid=subid))
+	return render_template("newmessage.html",subid=subid)
 
 @app.route('/logout')
 def logout():

@@ -25,6 +25,13 @@ def retrieveUsers():
 	users = cur.fetchall()
 	con.close()
 	return users
+def findUserId(username):
+	con = sql.connect("database.db")
+	cur = con.cursor()
+	cur.execute("SELECT id FROM users where username=?",(username,))
+	users = cur.fetchone()
+	con.close()
+	return users
 
 def addsubject(name):
 	con = sql.connect("database.db")
@@ -41,10 +48,10 @@ def retrievesubs():
 	con.close()
 	return subjects
 
-def addmessage(message,subjectid,userid):
+def addmsg(message,subjectid,userid):
 	con = sql.connect("database.db")
 	cur = con.cursor()
-	cur.execute("INSERT into messages (subid,userid,message) VALUES (?,?,?,?)",(subjectid,userid,message,))
+	cur.execute("INSERT into messages (subid,userid,message) VALUES (?,?,?)",(subjectid,userid,message,))
 	con.commit()
 	con.close()
 
