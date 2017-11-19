@@ -32,6 +32,14 @@ def findUserId(username):
 	users = cur.fetchone()
 	con.close()
 	return users
+def findUserName(userId):
+
+	con = sql.connect("database.db")
+	cur = con.cursor()
+	cur.execute("SELECT username FROM users where id=?",(userId,))
+	users = cur.fetchone()
+	con.close()
+	return users
 
 def addsubject(name):
 	con = sql.connect("database.db")
@@ -58,7 +66,18 @@ def addmsg(message,subjectid,userid):
 def retrievemsg(subjectid):
 	con = sql.connect("database.db")
 	cur = con.cursor()
-	cur.execute("SELECT * FROM messages WHERE subid=?",(subjectid,))
+	cur.execute("SELECT * FROM messages where subid=?",(int(subjectid),))
 	messages = cur.fetchall()
 	con.close()
+	print messages
+	return messages
+
+def retrievemsg2(subjectid):
+	con = sql.connect("database.db")
+	cur = con.cursor()
+	cur.execute("SELECT id FROM messages WHERE subid=?",(subjectid,))
+	messages = cur.fetchall()
+	con.close()
+	print "MEASS"
+	print messages 
 	return messages

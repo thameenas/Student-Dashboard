@@ -5,6 +5,8 @@ import models as dbHandler
 
 app = Flask(__name__)
 
+app.jinja_env.globals.update(findUserName=dbHandler.findUserName) 
+
 def redirect_url(default='index'):
     return request.args.get('next') or \
            request.referrer or \
@@ -63,6 +65,7 @@ def subcreate():
 @app.route('/topic/<subid>',methods=['GET','POST'])
 def topic(subid):
 	messages=dbHandler.retrievemsg(subid)
+	dbHandler.retrievemsg2(subid)
 	return render_template('topic.html',messages=messages,subid=subid)
 
 
@@ -71,8 +74,8 @@ def newmessage(subid):
 	if request.method=='POST':
 		message=request.form['message']
 		userId=dbHandler.findUserId(session['username'])
-		print userId
-		dbHandler.addmsg(subid,userId[0],message)
+		print userId, subid
+		dbHandler.addmsg(message,subid,userId[0])
 		return redirect(url_for('.topic',subid=subid))
 	return render_template("newmessage.html",subid=subid)
 
