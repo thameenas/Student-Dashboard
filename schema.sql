@@ -4,3 +4,7 @@ drop table if exists users;
     username text not null,
     password text not null
 );
+ drop table if exists subject;
+
+ create table subject(
+ 	id integer primary key autoincrement);
