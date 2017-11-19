@@ -7,4 +7,5 @@ drop table if exists users;
  drop table if exists subject;
 
  create table subject(
- 	id integer primary key autoincrement);
+ 	id integer primary key autoincrement,
+ 	name text not null);

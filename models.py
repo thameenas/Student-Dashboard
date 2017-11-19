@@ -26,4 +26,18 @@ def retrieveUsers():
 	con.close()
 	return users
 
+def addsubject(name):
+	con = sql.connect("database.db")
+	cur = con.cursor()
+	cur.execute("INSERT into subject (name) VALUES (?)",(name,))
+	con.commit()
+	con.close()
+	
+def retrievesubs():
+	con = sql.connect("database.db")
+	cur = con.cursor()
+	cur.execute("SELECT * FROM subject")
+	subjects = cur.fetchall()
+	con.close()
+	return subjects
 

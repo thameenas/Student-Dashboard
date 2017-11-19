@@ -8,20 +8,62 @@ app = Flask(__name__)
 @app.route('/', methods=['POST', 'GET'])
 def home():
 	if request.method=='POST':
-   		session['username'] = request.form['username']
+   		username = request.form['username']
    		password = request.form['password']
-   		if(dbHandler.checkUser(session['username'],password)):
+   		if(dbHandler.checkUser(username,password)):
+   			session['username']=username
    			return redirect(url_for('dash'))
-   		dbHandler.insertUser(session['username'], password)
+   		
+   		#dbHandler.insertUser(session['username'], password)
    		users = dbHandler.retrieveUsers()
 		return render_template('index.html', users=users)
    	else:
    		return render_template('index.html')
 
-@app.route('/user')
+@app.route('/user', methods=['GET','POST'])
 def dash():
 	if 'username' in session:
-		return 'User %s'%session['username']
+		subjects=dbHandler.retrievesubs()
+		print subjects
+
+		return render_template('dashboard.html', username=session['username'])
+
+
+@app.route('/new', methods=['POST','GET'])
+def createnew():
+	if request.method=='POST':
+		username=request.form['username']
+		password=request.form['password']
+		print username,password
+
+		#userlist=dbHandler.retrieveUsers()
+		#if username in userlist[0]:
+		#	return redirect(url_for('createnew'))
+		session['username']=username
+		dbHandler.insertUser(username,password)
+		return redirect(url_for('dash'))
+	else:
+		return render_template('new.html')
+
+@app.route('/createsub',methods=['POST','GET'])
+def subcreate():
+	if request.method=='POST':
+		subject=request.form['subject']
+		print subject
+		dbHandler.addsubject(subject)
+		return redirect(url_for('dash'))
+	else:
+		return render_template('createsub.html')
+
+
+
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it's there
+    session.pop('username', None)
+    return redirect(url_for('home'))
+
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 if __name__ == '__main__':
