@@ -26,7 +26,7 @@ def dash():
 		subjects=dbHandler.retrievesubs()
 		print subjects
 
-		return render_template('dashboard.html', username=session['username'])
+		return render_template('dashboard.html', username=session['username'], subject=subjects)
 
 
 @app.route('/new', methods=['POST','GET'])
@@ -55,8 +55,15 @@ def subcreate():
 	else:
 		return render_template('createsub.html')
 
+@app.route('/topic/<subid>',methods=['GET','POST'])
+def topic(subid):
+	messages=dbHandler.retrievemsg(subid)
+	return render_template('topic.html',messages=messages,subid=subid)
 
 
+@app.route('/topic/<subid>/new',methods=['GET','POST'])
+def newmessage(subid):
+	return subid
 
 @app.route('/logout')
 def logout():

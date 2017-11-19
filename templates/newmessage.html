@@ -15,19 +15,15 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="#">{{ username }}</a></li>
-      <li><a href={{ url_for('subcreate') }}>New Subject</a></li>
+      <li><a href="#">New Subject</a></li>
+      <li>{{sub}}</li>
     </ul>
   </div>
 </nav>
 <div class="container">
 	<div class="row">
-	<ul class="list-group">
-	{% for sub in subject%}
-		<li class="list-group-item"><a href="topic/{{sub[0]}}">{{sub[0]}} : {{sub[1]}}</li>
-	{%endfor%}
-	</ul>
-
-	</div>
+  <input class="input-lg col-lg-4" name="message">
+  </div>
 
 </div>
 </body>

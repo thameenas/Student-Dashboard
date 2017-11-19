@@ -41,3 +41,17 @@ def retrievesubs():
 	con.close()
 	return subjects
 
+def addmessage(message,subjectid,userid):
+	con = sql.connect("database.db")
+	cur = con.cursor()
+	cur.execute("INSERT into messages (subid,userid,message) VALUES (?,?,?,?)",(subjectid,userid,message,))
+	con.commit()
+	con.close()
+
+def retrievemsg(subjectid):
+	con = sql.connect("database.db")
+	cur = con.cursor()
+	cur.execute("SELECT * FROM messages WHERE subid=?",(subjectid,))
+	messages = cur.fetchall()
+	con.close()
+	return messages
