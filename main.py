@@ -16,7 +16,6 @@ def redirect_url(default='index'):
 def home():
 	if request.method=='POST':
    		username = request.form['username']
-   		password = request.form['password']
    		if(dbHandler.checkUser(username,password)):
    			session['username']=username
    			return redirect(url_for('dash'))
@@ -52,11 +51,11 @@ def createnew():
 	else:
 		return render_template('new.html')
 
-@app.route('/createsub',methods=['POST','GET'])
+@app.route('/create',methods=['POST','GET'])
 def subcreate():
 	if request.method=='POST':
 		subject=request.form['subject']
-		print subject
+		
 		dbHandler.addsubject(subject)
 		return redirect(url_for('dash'))
 	else:
@@ -77,7 +76,8 @@ def newmessage(subid):
 		print userId, subid
 		dbHandler.addmsg(message,subid,userId[0])
 		return redirect(url_for('.topic',subid=subid))
-	return render_template("newmessage.html",subid=subid)
+	else:	
+		return render_template('newmessage.html',subid=subid)
 
 @app.route('/logout')
 def logout():
