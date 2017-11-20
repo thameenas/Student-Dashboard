@@ -20,10 +20,12 @@ def home():
    		if(dbHandler.checkUser(username,password)):
    			session['username']=username
    			return redirect(url_for('dash'))
+   		else:
+   			return render_template('index.html',error=True)
    		
    		#dbHandler.insertUser(session['username'], password)
-   		users = dbHandler.retrieveUsers()
-		return render_template('index.html', users=users)
+   		#users = dbHandler.retrieveUsers()
+		return render_template('index.html', error=False)
    	else:
    		return render_template('index.html')
 
