@@ -1,11 +1,16 @@
 <html>
 <head>
+<<<<<<< HEAD
   <title>New Subject</title>
+=======
+  <title>Bootstrap Example</title>
+>>>>>>> 7fc30b82c92f326f8f8ddc1fcbf6551b95bc50aa
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
   <link href="../static/bootstrap.css" rel="stylesheet">
     <link href="../static/font-awesome.css" rel="stylesheet" />
     <link href="../static/style1.css" rel="stylesheet">
@@ -86,7 +91,6 @@
   </script>
 
   </body>
-  <a></a>
 </html>
 
 
@@ -95,3 +99,31 @@
 
 
 
+=======
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">CS5A Forum</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">{{ username }}</a></li>
+      <li><a href="#">New Subject</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+	<div class="row">
+    <form method="post">
+          <input type="text" name=subject placeholder="Enter Subject" required/>
+          <br>
+          <input type="submit" class="button" value="Submit" />
+        </form>
+
+	</div>
+
+</div>
+</body>
+</html>
+>>>>>>> 7fc30b82c92f326f8f8ddc1fcbf6551b95bc50aa
