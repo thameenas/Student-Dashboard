@@ -7,18 +7,16 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <link href="/static/bootstrap.css" rel="stylesheet">
+  <link href="/static/bootstrap.css" rel="stylesheet"/>
     <link href="/static/font-awesome.css" rel="stylesheet" />
-    <link href="/static/style1.css" rel="stylesheet">
-    <link href="/static/style-responsive.css" rel="stylesheet">
+    <link href="/static/style1.css" rel="stylesheet"/>
+    <link href="/static/style-responsive.css" rel="stylesheet"/>
 </head>
 <body>
 <section id="container" >
       <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <a href="#" class="logo"><b>CS5A Forum</b></a>
+              
+            <a href="/user" class="logo"><b>CS5A Forum</b></a>
             <div class="nav notify-row" id="top_menu">
                
                          
@@ -27,7 +25,7 @@
             </div>
             <div class="top-menu">
               <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="#">Logout</a></li>
+                    <li><a class="logout" href="/logout"></a></li>
               </ul>
             </div>
         </header>
@@ -35,7 +33,7 @@
           <div id="sidebar"  class="nav-collapse ">
               <ul class="sidebar-menu" id="nav-accordion">
               
-                  <p class="centered"><a href="#"><img src="/static/ui-sam.jpg" class="img-circle" width="60"></a></p>
+                  <p class="centered"><img src="/static/ui-sam.jpg" class="img-circle" width="60"></p>
                   <h5 class="centered">{{username}}</h5>
                     
                  
@@ -48,25 +46,26 @@
       </aside>
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> New Message</h3>
+            <h3> New Message</h3>
         <div class="row">
         
                   
                     
                   <div class="col-md-12">
                       <div class="content-panel">
-                           <form class="form-horizontal style-form" name="form1" method="post" action="" onSubmit="return valid();">
+                           <form class="form-horizontal style-form" name="form1" method="post"  onSubmit="return valid();">
                            <p style="color:#F00"></p>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label" style="padding-left:40px;">Enter message</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="message" value="" >
+                                  <input type="text" autofocus="autofocus" class="form-control" name="message" required="required">
                               </div>
                           </div>
                           
                              
                           <div style="margin-left:100px;">
-                          <input type="submit" name="Submit" value="Create" class="btn btn-theme"></div>
+                          <input type="submit" name="Submit" value="Create" class="btn btn-theme">
+                          <button onclick="goBack()" type="button" class="btn btn-theme">Cancel</button>
                           </form>
                       </div>
                   </div>
@@ -84,7 +83,11 @@
           $('select.styled').customSelect();
       });
 
-  </script>
+function goBack() {
+    window.history.back();
+}
+</script>
+  
 
   </body>
 </html>
