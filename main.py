@@ -50,8 +50,7 @@ def createnew():
 		session['username']=username
 		dbHandler.insertUser(email,username,password)
 		return redirect(url_for('home'))
-	else:
-		return render_template('new.html')
+	
 
 @app.route('/create',methods=['POST','GET'])
 def subcreate():
