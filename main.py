@@ -41,13 +41,14 @@ def createnew():
 	if request.method=='POST':
 		username=request.form['username']
 		password=request.form['password']
+		email=request.form['email']
 
 
 		#userlist=dbHandler.retrieveUsers()
 		#if username in userlist[0]:
 		#	return redirect(url_for('createnew'))
 		session['username']=username
-		dbHandler.insertUser(username,password)
+		dbHandler.insertUser(email,username,password)
 		return redirect(url_for('home'))
 	else:
 		return render_template('new.html')
@@ -61,6 +62,25 @@ def subcreate():
 		return redirect(url_for('dash'))
 	else:
 		return render_template('createsub.html')
+
+#@app.route('/change',methods=['POST','GET'])
+#def change():
+#		password=dbHandler.retrievepass(session['username'])
+#		return render_template('changepass.html',password=password)
+
+@app.route('/changepass',methods=['POST','GET'])
+def changepass():
+	if request.method=='POST':
+		password=dbHandler.retrievepass(session['username'])
+		old_pass=request.form['oldpass']
+		new_pass=request.form['newpass']
+		if password==old_pass:
+			dbHandler.addpass(session['username'],new_pass)
+			return redirect(url_for('dash'))
+	else:
+
+		return render_template('changepass.html')
+
 
 @app.route('/topic/<subid>',methods=['GET','POST'])
 def topic(subid):

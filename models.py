@@ -1,9 +1,9 @@
 import sqlite3 as sql
 
-def insertUser(username,password):
+def insertUser(email,username,password):
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("INSERT INTO users (username,password) VALUES (?,?)", (username,password))
+    cur.execute("INSERT INTO users (email,username,password) VALUES (?,?,?)", (email,username,password))
     con.commit()
     con.close()
 def checkUser(username,password):
@@ -40,6 +40,21 @@ def findUserName(userId):
 	users = cur.fetchone()
 	con.close()
 	return users
+
+def retrievepass(username):
+	con = sql.connect("database.db")
+	cur = con.cursor()
+	cur.execute("SELECT password FROM users where username=?",(username,))
+	password = cur.fetchone()
+	con.close()
+	return password[0]
+
+def addpass(username,newpass):
+	con = sql.connect("database.db")
+	cur = con.cursor()
+	cur.execute("UPDATE users SET password=? where username=?",(newpass,username))
+	con.commit()
+	con.close()
 
 def addsubject(name):
 	con = sql.connect("database.db")
