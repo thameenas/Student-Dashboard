@@ -16,6 +16,7 @@ def redirect_url(default='index'):
 def home():
 	if request.method=='POST':
    		username = request.form['username']
+   		password= request.form['password']
    		if(dbHandler.checkUser(username,password)):
    			session['username']=username
    			return redirect(url_for('dash'))
