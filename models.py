@@ -71,6 +71,14 @@ def retrievesubs():
 	con.close()
 	return subjects
 
+def retrievesub(subid):
+	con = sql.connect("database.db")
+	cur = con.cursor()
+	cur.execute("SELECT name FROM subject where id=?",(subid))
+	subject = cur.fetchone()
+	con.close()
+	return subject
+
 def addmsg(message,subjectid,userid):
 	con = sql.connect("database.db")
 	cur = con.cursor()
@@ -93,6 +101,5 @@ def retrievemsg2(subjectid):
 	cur.execute("SELECT id FROM messages WHERE subid=?",(subjectid,))
 	messages = cur.fetchall()
 	con.close()
-	print "MEASS"
-	print messages 
+	
 	return messages

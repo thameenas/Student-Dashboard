@@ -83,9 +83,10 @@ def changepass():
 
 @app.route('/topic/<subid>',methods=['GET','POST'])
 def topic(subid):
+	subject=dbHandler.retrievesub(subid)
 	messages=dbHandler.retrievemsg(subid)
 	dbHandler.retrievemsg2(subid)
-	return render_template('topic.html',messages=messages,subid=subid)
+	return render_template('topic.html',messages=messages,subid=subid,subject=subject)
 
 
 @app.route('/topic/<subid>/new',methods=['GET','POST'])
