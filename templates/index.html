@@ -81,6 +81,7 @@
       <div class="logmod__tab lgm-2">
         <div class="logmod__heading">
           <span class="logmod__heading-subtitle">Enter your username and password <strong>to sign in</strong></span>
+          {%if error%}<div><span>Invalid Credentials<span></div>{%endif%}
         </div> 
         <div class="logmod__form">
           <form accept-charset="utf-8" action="/" class="simform" method='POST'>
